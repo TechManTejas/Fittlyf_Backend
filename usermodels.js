@@ -29,18 +29,23 @@ export const OrderModelPage1 = mongoose.model("orderpage1", mongoose.Schema({
     state: String,
     zip: Number,
     saveThis: Boolean,
-    utc : Date
-
-    // tableName : String,
-    // duration : Number/String,
-    // noOfBottles : Number,
-    // noOfTablets : Number,
-    // Price : Number
+    utc : Date,
+    duration : String,
+    noOfBottles : Number,
+    noOfTablets : Number,
+    Price : Number
 }))
 
 export const OrderModelPage2 = mongoose.model("orderpage2", mongoose.Schema({
-    cashOnDelivery: Boolean
+    cashOnDelivery: Boolean,
+    date : Date
 }))
+
+export const OrderModelPage3 = mongoose.model("orderpage3", mongoose.Schema({
+    sameAsShipping: Boolean,
+    date : Date
+}))
+
 
 
 
