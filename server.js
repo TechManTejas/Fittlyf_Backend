@@ -1,10 +1,14 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import { OrderModelPage1, OrderModelPage2, OrderModelPage3, ProductModel } from "./usermodels.js"
+import { OrderModelPage1 } from "./usermodels.js"
+import { v4 as uuidv4 } from 'uuid';
+
 
 const uri = "mongodb+srv://admin:2Sr3!sL^r4wX@cluster0.kemmroz.mongodb.net/database?retryWrites=true&w=majority"
 mongoose.connect(uri)
+
+mongoose.connection.once("open", () => console.log("connected")).on("error", (e) => console.log(`Error : ${e}`))
 
 const app = express()
 app.use(express.json())
@@ -19,7 +23,7 @@ app.get("/test", (req, res) => {
 // Orders APIs
 app.post("/api/send/order/1", (req, res) => {
     let message = req.body
-    message = { ...message, date: new Date() }
+    message = { ...message, date: new Date(), id: uuidv4(), mode: null, shippingSame: null }
     console.log(message)
     OrderModelPage1.create(message, (err, data) => {
         if (err) {
@@ -27,62 +31,30 @@ app.post("/api/send/order/1", (req, res) => {
         }
         else {
             console.log("success")
-            res.status(200).send("success")
+            res.status(200).send({ code: "success", data: { data } })
         }
     })
 })
 
 
-
 app.post("/api/send/order/2", (req, res) => {
     let message = req.body
-    message = { ...message, date: new Date() }
     console.log(message)
-    OrderModelPage2.create(message, (err, data) => {
-        if (err) {
-            res.status(500).send("error")
-        }
-        else {
-            res.status(200).send("success")
-        }
+    OrderModelPage1.findOneAndUpdate({ id: message.id }, { mode : message.mode }).then(() => {
+        console.log("success")
+        res.status(200).send({ code: "success" })
     })
 })
 
 app.post("/api/send/order/3", (req, res) => {
     let message = req.body
-    message = { ...message, date: new Date() }
     console.log(message)
-    OrderModelPage3.create(message, (err, data) => {
-        if (err) {
-            res.status(500).send("error")
-        }
-        else {
-            res.status(200).send("success")
-        }
+    OrderModelPage1.findOneAndUpdate({ id: message.id }, { shippingSame: message.shippingSame }).then(() => {
+        console.log("success")
+        res.status(200).send({ code: "success" })
     })
 })
 
-// app.post('/addproduct', (req, res) => {  
-//     const message = req.body
-//     ProductModel.create(message, (err, data) => {
-//         if (err) {
-//             res.status(500).send(err)
-//         }
-//         else {
-//             res.status(200).send(data)
-//         }
-//     })
-// })
 
-// app.get('/getproduct', (req, res) => {
-//     ProductModel.find({}, (err, data) => {
-//         if (err) {
-//             res.status(500).send(err)
-//         }
-//         else {
-//             res.status(200).send(data)
-//         }
-//     })
-// })
 
 app.listen(port, () => { console.log(`Listen on port ${port}`) })

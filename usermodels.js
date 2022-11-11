@@ -18,6 +18,7 @@ export const ProductModel = mongoose.model("product", mongoose.Schema({
 }))
 
 export const OrderModelPage1 = mongoose.model("orderpage1", mongoose.Schema({
+    id : String,
     emailPhoneNumber: String,
     emailMe: Boolean,
     country: String,
@@ -33,18 +34,20 @@ export const OrderModelPage1 = mongoose.model("orderpage1", mongoose.Schema({
     duration : String,
     noOfBottles : Number,
     noOfTablets : Number,
-    Price : Number
+    Price : Number,
+    mode : Boolean,
+    shippingSame : Boolean
 }))
 
-export const OrderModelPage2 = mongoose.model("orderpage2", mongoose.Schema({
-    cashOnDelivery: Boolean,
-    date : Date
-}))
+// export const OrderModelPage2 = mongoose.model("orderpage2", mongoose.Schema({
+//     cashOnDelivery: Boolean,
+//     date : Date
+// }))
 
-export const OrderModelPage3 = mongoose.model("orderpage3", mongoose.Schema({
-    sameAsShipping: Boolean,
-    date : Date
-}))
+// export const OrderModelPage3 = mongoose.model("orderpage3", mongoose.Schema({
+//     sameAsShipping: Boolean,
+//     date : Date
+// }))
 
 
 
