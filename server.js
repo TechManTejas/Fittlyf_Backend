@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import { OrderModelPage1 } from "./usermodels.js"
 import { v4 as uuidv4 } from 'uuid';
 import Razorpay from "Razorpay"
-
+import shortid from "shortid"
 
 const uri = "mongodb+srv://admin:2Sr3!sL^r4wX@cluster0.kemmroz.mongodb.net/database?retryWrites=true&w=majority"
 mongoose.connect(uri)
@@ -55,7 +55,32 @@ app.post("/api/send/order/3", (req, res) => {
     })
 })
 
-// var instance = new Razorpay({ key_id: 'YOUR_KEY_ID', key_secret: 'YOUR_SECRET' })
+const razorpayInstance = new Razorpay({ key_id: 'rzp_test_YGbpgyDF6Ac4JM', key_secret: 'DUN5FBBGXbeH9LqZwsEoM7IA' })
+app.post('/razorpay', async(req, res) => {
+
+    const amount = 500;
+    const currency = 'INR'
+
+    const options = {
+        amount: amount * 100,
+        currency: currency,
+        receipt: shortid.generate(),
+        notes: {
+            key1: "value3",
+            key2: "value2"
+        }
+    }
+    try{
+        const response = await razorpayInstance.orders.create(options)
+        console.log(response)
+        res.send(response)
+    }catch(error){
+        console.log(error)
+        res.send(error)
+    }
+})
+
+
 
 // instance.orders.create({
 //     amount: 50000,
