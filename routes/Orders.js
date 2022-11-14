@@ -23,7 +23,6 @@ router.post("/1", (req, res) => {
     })
 })
 
-
 router.post("/2", (req, res) => {
     let message = req.body
     console.log(message)

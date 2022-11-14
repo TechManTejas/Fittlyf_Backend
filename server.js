@@ -3,8 +3,9 @@
 // import mongoose from "mongoose"
 // import { OrderModelPage1 } from "./models/usermodels"
 // import { v4 as uuidv4 } from 'uuid';
-import Razorpay from "razorpay"
-import shortid from "shortid"
+
+const Razorpay = require('razorpay')
+const shortid = require("shortid")
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
