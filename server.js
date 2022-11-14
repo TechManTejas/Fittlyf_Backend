@@ -55,7 +55,7 @@ app.post("/api/send/order/3", (req, res) => {
     })
 })
 
-const razorpayInstance = new Razorpay({ key_id: 'rzp_live_LGQWlNB1DMOVwJ', key_secret: 'U4huXcpQQtYOZlDskDnUCTeV' })
+const razorpayInstance = new Razorpay({ key_id: 'rzp_live_N1vLKkvguKjZGT', key_secret: 'fw1xS3zQQ3AfMH8ZxNhbyk7q' })
 app.post('/razorpay', async(req, res) => {
 
     const amount = 1;
