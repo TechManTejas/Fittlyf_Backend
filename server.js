@@ -3,7 +3,7 @@ import cors from "cors"
 import mongoose from "mongoose"
 import { OrderModelPage1 } from "./usermodels.js"
 import { v4 as uuidv4 } from 'uuid';
-import Razorpay from "Razorpay"
+import Razorpay from "razorpay"
 import shortid from "shortid"
 
 const uri = "mongodb+srv://admin:2Sr3!sL^r4wX@cluster0.kemmroz.mongodb.net/database?retryWrites=true&w=majority"
