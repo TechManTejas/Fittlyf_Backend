@@ -1,7 +1,6 @@
 {
   "name": "node_backend",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +16,6 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "mongoose": "^6.6.7",
-    "uuid": "^9.0.0"
+    "uuidv4": "^6.2.13"
   }
 }
