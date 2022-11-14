@@ -58,7 +58,7 @@ app.post("/api/send/order/3", (req, res) => {
 const razorpayInstance = new Razorpay({ key_id: 'rzp_test_YGbpgyDF6Ac4JM', key_secret: 'DUN5FBBGXbeH9LqZwsEoM7IA' })
 app.post('/razorpay', async(req, res) => {
 
-    const amount = 500;
+    const amount = 1;
     const currency = 'INR'
 
     const options = {
