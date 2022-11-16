@@ -67,10 +67,8 @@ app.post("/placeorder", (req, res) => {
         var urlGetToken = "https://apiv2.shiprocket.in/v1/external/auth/login/"
         var urlCreateOrder = "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc/"
         var userCredentials = {
-            "email": "vaijtejas23@gmail.com",
-            "password": "tech234man@TEJAS"
-            // "email": "fittlyf2020@gmail.com",
-            // "password": "asdfASDF1234!@#$"
+            "email": "fittlyf2020@gmail.com",
+            "password": "asdfASDF1234!@#$"
         }
         var orderData = {
             "order_id": id,
