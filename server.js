@@ -1,9 +1,3 @@
-// import express from "express"
-// import cors from "cors"
-// import mongoose from "mongoose"
-// import { OrderModelPage1 } from "./models/usermodels"
-// import { v4 as uuidv4 } from 'uuid';
-
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
@@ -11,7 +5,7 @@ const OrdersAPI = require("./routes/Orders")
 
 
 const uri = "mongodb+srv://admin:2Sr3!sL^r4wX@cluster0.kemmroz.mongodb.net/database?retryWrites=true&w=majority"
-// mongoose.connect(uri)
+mongoose.connect(uri)
 
 mongoose.connection.once("open", () => console.log("connected")).on("error", (e) => console.log(`Error : ${e}`))
 

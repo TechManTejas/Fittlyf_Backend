@@ -20,7 +20,8 @@ const OrderModelPage1 = mongoose.Schema({
     Price : Number,
     mode : Boolean,
     shippingSame : Boolean,
-    packNumber : Number
+    packNumber : Number,
+    PhoneNumber : Number
 })
 
 module.exports = mongoose.model("orderpage1", OrderModelPage1);
