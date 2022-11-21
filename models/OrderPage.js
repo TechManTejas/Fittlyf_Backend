@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const OrderModelPage1 = mongoose.Schema({
-    id : String,
+    id: String,
     emailPhoneNumber: String,
     emailMe: Boolean,
     country: String,
@@ -13,15 +13,18 @@ const OrderModelPage1 = mongoose.Schema({
     state: String,
     zip: Number,
     saveThis: Boolean,
-    utc : Date,
-    duration : String,
-    noOfBottles : Number,
-    noOfTablets : Number,
-    Price : Number,
-    mode : Boolean,
-    shippingSame : Boolean,
-    packNumber : Number,
-    PhoneNumber : Number
+    utc: Date,
+    duration: String,
+    noOfBottles: Number,
+    noOfTablets: Number,
+    Price: Number,
+    cod: Boolean,
+    shippingSame: Boolean,
+    packNumber: Number,
+    PhoneNumber: Number,
+    razorpay_order_id: String,
+    razorpay_payment_id: String,
+    razorpay_signature: String
 })
 
-module.exports = mongoose.model("orderpage1", OrderModelPage1);
+module.exports = mongoose.model("orders", OrderModelPage1);

@@ -10,7 +10,11 @@ const OrderPage = require("../models/OrderPage")
 
 router.post("/1", (req, res) => {
     let message = req.body
-    message = { ...message, date: new Date(), id: uuid(), mode: null, shippingSame: null }
+    message = {
+        ...message, date: new Date(), id: uuid(), cod: null, shippingSame: null, razorpay_order_id: null,
+        razorpay_payment_id: null,
+        razorpay_signature: null
+    }
     console.log(message)
     OrderPage.create(message, (err, data) => {
         if (err) {
@@ -20,16 +24,16 @@ router.post("/1", (req, res) => {
             console.log("success")
             res.status(200).send({ code: "success", data: { data } })
         }
-    })  
+    })
 })
 
 
 router.post("/2", (req, res) => {
     let message = req.body
     console.log(message)
-    OrderPage.findOneAndUpdate({ id: message.id }, { mode: message.mode }).then(() => {
+    OrderPage.findOneAndUpdate({ id: message.id }, { cod: message.cod }).then(() => {
         console.log("success")
-        res.status(200).send({ code: "success"})
+        res.status(200).send({ code: "success" })
     })
 })
 
@@ -38,6 +42,19 @@ router.post("/3", (req, res) => {
     let message = req.body
     console.log(message)
     OrderPage.findOneAndUpdate({ id: message.id }, { shippingSame: message.shippingSame }).then(() => {
+        console.log("success")
+        res.status(200).send({ code: "success" })
+    })
+})
+
+router.post("/payment", (req, res) => {
+    let message = req.body
+    console.log(message)
+    OrderPage.findOneAndUpdate({ id: message.id }, {
+        razorpay_order_id: message.razorpay_order_id,
+        razorpay_payment_id: message.razorpay_payment_id,
+        razorpay_signature: message.razorpay_signature
+    }).then(() => {
         console.log("success")
         res.status(200).send({ code: "success" })
     })
