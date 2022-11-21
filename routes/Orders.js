@@ -1,12 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { uuid } = require('uuidv4');
-const OrderPage = require("../models/OrderPage")
-
-// router.get("/test", (req, res) => {
-//     res.status(200).send("Working")
-// })
-
+const OrderPage = require("../models/Order")
 
 router.post("/1", (req, res) => {
     let message = req.body
@@ -15,7 +10,6 @@ router.post("/1", (req, res) => {
         razorpay_payment_id: null,
         razorpay_signature: null
     }
-    console.log(message)
     OrderPage.create(message, (err, data) => {
         if (err) {
             res.status(500).send("error")
@@ -30,7 +24,6 @@ router.post("/1", (req, res) => {
 
 router.post("/2", (req, res) => {
     let message = req.body
-    console.log(message)
     OrderPage.findOneAndUpdate({ id: message.id }, { cod: message.cod }).then(() => {
         console.log("success")
         res.status(200).send({ code: "success" })
@@ -40,7 +33,6 @@ router.post("/2", (req, res) => {
 
 router.post("/3", (req, res) => {
     let message = req.body
-    console.log(message)
     OrderPage.findOneAndUpdate({ id: message.id }, { shippingSame: message.shippingSame }).then(() => {
         console.log("success")
         res.status(200).send({ code: "success" })
@@ -49,7 +41,6 @@ router.post("/3", (req, res) => {
 
 router.post("/payment", (req, res) => {
     let message = req.body
-    console.log(message)
     OrderPage.findOneAndUpdate({ id: message.id }, {
         razorpay_order_id: message.razorpay_order_id,
         razorpay_payment_id: message.razorpay_payment_id,

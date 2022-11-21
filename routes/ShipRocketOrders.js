@@ -1,16 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const axios = require("axios")
-const OrderPage = require("../models/OrderPage")
+const OrderPage = require("../models/Order")
 
 router.post("/", (req, res) => {
     let message = req.body
     let id = message.id
-    console.log(message)
 
     var mongoData;
     OrderPage.findOne({ id: id }, function (err, data) {
-        // console.log(data)
         mongoData = data
     }).clone().then(() => {
         var bearerToken;
@@ -78,11 +76,8 @@ router.post("/", (req, res) => {
             "order_type": ""
         }
 
-        console.log(orderData)
-
         axios.post(urlGetToken, userCredentials).then((data) => {
             bearerToken = data.data.token
-            console.log(bearerToken)
 
             axios.post(urlCreateOrder, orderData, {
                 headers: { 'Authorization': `Bearer ${bearerToken}` }

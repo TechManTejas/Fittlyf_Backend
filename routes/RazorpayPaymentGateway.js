@@ -3,7 +3,9 @@ const router = express.Router()
 const Razorpay = require('razorpay'); 
 const { uuid } = require('uuidv4');
 
-const razorpayInstance = new Razorpay({ key_id: 'rzp_live_N1vLKkvguKjZGT', key_secret: 'fw1xS3zQQ3AfMH8ZxNhbyk7q' })
+// const razorpayInstance = new Razorpay({ key_id: 'rzp_live_N1vLKkvguKjZGT', key_secret: 'fw1xS3zQQ3AfMH8ZxNhbyk7q' })
+const razorpayInstance = new Razorpay({ key_id: 'rzp_test_WPA6J9hOSf3nLT', key_secret: 'kbAgn3XNsq1Gwp4nvPavVlBu' })
+
 router.post('/', async (req, res) => {
 
     const amount = 1;
@@ -20,6 +22,7 @@ router.post('/', async (req, res) => {
     }
     try {
         const response = await razorpayInstance.orders.create(options)
+        console.log("Razorpay")
         console.log(response)
         res.send(response)
     } catch (error) {
