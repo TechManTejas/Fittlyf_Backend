@@ -1,20 +1,14 @@
 const mongoose = require("mongoose")
 
 export const ProductModel = mongoose.Schema({
-    title: String,
-    price: Number,
-    MRP: Number,
-    vendor: String,
-    available: Number,
-    desciption: [{
-        type: String
-    }],
-    pack: [{
-        duration: String,
+    sku: String,
+    pack: {
+        duration: Number,
         price: Number,
         noOfBottles: Number,
-        noOfTables: Number
-    }]
+        noOfTables: Number,
+        expiry: Number,
+    }
 })
 
 module.exports = mongoose.model("product", ProductModel);
