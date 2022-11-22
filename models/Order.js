@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const OrderModelPage1 = mongoose.Schema({
+const OrderSchema = mongoose.Schema({
     id: String,
     emailPhoneNumber: String,
     emailMe: Boolean,
@@ -27,4 +27,4 @@ const OrderModelPage1 = mongoose.Schema({
     razorpay_signature: String
 })
 
-module.exports = mongoose.model("orders", OrderModelPage1);
+module.exports = mongoose.model("orders", OrderSchema);
