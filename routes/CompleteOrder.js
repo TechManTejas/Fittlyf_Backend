@@ -3,16 +3,16 @@ const router = express.Router()
 const { uuid } = require('uuidv4');
 const CompleteOrder = require('../models/CompleteOrder')
 
-router.get("/get", (req, res) => {
+router.post("/get", (req, res) => {
     let message = req.body
-    // console.log(message)
+    console.log(message)
     CompleteOrder.findOne({ orderID: message.id }, (err, data) => {
         // console.log(data)
         if (err) {
             res.status(500).send(err)
         }
         else if(data == null) {
-            res.status(204).send("")
+            res.status(204).send("NO SUCH ORDER PRESENT")
         }
         else res.status(200).send(data)
     })
@@ -28,7 +28,7 @@ router.post("/set", (req, res) => {
         }
         else {
             console.log("success")
-            res.status(200).send({ code: "success", data: { data } })
+            res.status(200).send({ code: "success", data})
         }
     })
 })
