@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-export const ProductModel = mongoose.Schema({
+const ProductModel = mongoose.Schema({
     sku: String,
     pack: {
         duration: Number,

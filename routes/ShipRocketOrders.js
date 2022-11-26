@@ -7,9 +7,8 @@ router.post("/", (req, res) => {
     let message = req.body
     let id = message.id
 
-    var mongoData;
     OrderPage.findOne({ id: id }, function (err, data) {
-        mongoData = data
+        var mongoData = data
     }).clone().then(() => {
         var bearerToken;
         var urlGetToken = "https://apiv2.shiprocket.in/v1/external/auth/login/"

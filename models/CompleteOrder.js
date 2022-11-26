@@ -13,11 +13,9 @@ const CompleteOrderSchema = mongoose.Schema({
     city: String,
     state: String,
     zip: Number,
-    price: Number,
     PhoneNumber : Number,
-    period : String,
-    bottle: Number,
-    tablets: Number
+    price: Number,
+    sku: String,
 })
 
 module.exports = mongoose.model("CompleteOrders", CompleteOrderSchema);
