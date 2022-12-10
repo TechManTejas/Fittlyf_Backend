@@ -3,19 +3,21 @@ const router = express.Router()
 const axios = require("axios")
 const OrderPage = require("../models/Order")
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     let message = req.body
     let id = message.id
+    var mongoData;
 
-    OrderPage.findOne({ id: id }, function (err, data) {
-        var mongoData = data
-    }).clone().then(() => {
+    await OrderPage.findOne({ id: id }, function (err, data) {
+        mongoData = data
+        console.log(mongoData)
+    }).clone().then((mongoData) => {
         var bearerToken;
         var urlGetToken = "https://apiv2.shiprocket.in/v1/external/auth/login/"
         var urlCreateOrder = "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc/"
         var userCredentials = {
-            "email": "fittlyf2020@gmail.com",
-            "password": "asdfASDF1234!@#$"
+            "email": "techmantejas@gmail.com",
+            "password": "tech234man@TEJAS"
         }
         var orderData = {
             "order_id": id,

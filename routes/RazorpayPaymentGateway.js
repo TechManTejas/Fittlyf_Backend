@@ -12,9 +12,10 @@ router.post('/', async (req, res) => {
 
     console.log(req.body.id)
     var mongoData;
-    Orders.findOne({ id: req.body.id }, function (err, data) {
+    await Orders.findOne({ id: req.body.id }, function (err, data) {
         mongoData = data
-    }).clone().then(() => {
+        console.log(mongoData)
+    }).clone().then((mongoData) => {
         Products.findOne({ sku: mongoData.sku}, async function (err, data) {
             const amount = data.pack.price;
             const currency = 'INR'
