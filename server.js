@@ -1,6 +1,10 @@
 const express = require("express")
 const cors = require("cors")
+const https = require("https")
+const path = require("path")
+const fs = require("fs")
 const mongoose = require("mongoose")
+
 const OrdersAPI = require("./routes/Orders")
 const RazorpayPaymentGatewayAPI = require("./routes/RazorpayPaymentGateway")
 const ShipRocketOrdersAPI = require("./routes/ShipRocketOrders")
@@ -21,4 +25,9 @@ app.use("/razorpay", RazorpayPaymentGatewayAPI)
 app.use("/placeorder", ShipRocketOrdersAPI)
 app.use("/orders", CompleteOrderAPI)
 
-app.listen(port, () => { console.log(`Listen on port ${port}`) })
+const sslServer = https.createServer({
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+},app)
+
+sslServer.listen(port, () => { console.log(`Secure server listening on ${port}`) })
