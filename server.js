@@ -30,4 +30,4 @@ const sslServer = https.createServer({
     cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
 },app)
 
-sslServer.listen(port, () => { console.log(`Secure server listening on ${port}`) })
+app.listen(port, () => { console.log(`Secure server listening on ${port}`) })
