@@ -18,7 +18,7 @@ mongoose.connection.once("open", () => console.log("connected")).on("error", (e)
 const app = express()
 app.use(express.json())
 app.use(cors())
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 443
 
 app.use("/api/send/order", OrdersAPI)
 app.use("/razorpay", RazorpayPaymentGatewayAPI)
@@ -26,8 +26,9 @@ app.use("/placeorder", ShipRocketOrdersAPI)
 app.use("/orders", CompleteOrderAPI)
 
 const sslServer = https.createServer({
-    key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
-    cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'server.key')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'fittlyf.crt')),
+    ca: fs.readFileSync(path.join(__dirname, 'cert', 'gd_bundle-g2-g1.crt'))
 },app)
 
-app.listen(port, () => { console.log(`Secure server listening on ${port}`) })
+sslServer.listen(port, () => { console.log(`Secure server listening on ${port}`) })
