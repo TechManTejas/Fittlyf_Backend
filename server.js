@@ -18,7 +18,7 @@ mongoose.connection.once("open", () => console.log("connected")).on("error", (e)
 const app = express()
 app.use(express.json())
 app.use(cors())
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 80
 
 app.use("/api/send/order", OrdersAPI)
 app.use("/razorpay", RazorpayPaymentGatewayAPI)
