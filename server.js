@@ -18,12 +18,15 @@ mongoose.connection.once("open", () => console.log("connected")).on("error", (e)
 const app = express()
 app.use(express.json())
 app.use(cors())
-const port = process.env.PORT || 443
+const port = process.env.PORT || 9000
 
 app.use("/api/send/order", OrdersAPI)
 app.use("/razorpay", RazorpayPaymentGatewayAPI)
 app.use("/placeorder", ShipRocketOrdersAPI)
 app.use("/orders", CompleteOrderAPI)
+app.use("/.well-known/pki-validation/3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt", (req, res) => {
+    res.sendFile(path.join(__dirname,'' ,'3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt'))
+})
 
 const sslServer = https.createServer({
     key: fs.readFileSync(path.join(__dirname, 'cert', 'server.key')),
@@ -31,4 +34,4 @@ const sslServer = https.createServer({
     ca: fs.readFileSync(path.join(__dirname, 'cert', 'gd_bundle-g2-g1.crt'))
 },app)
 
-sslServer.listen(port, () => { console.log(`Secure server listening on ${port}`) })
+app.listen(port, () => { console.log(`Secure server listening on ${port}`) })
