@@ -12,12 +12,16 @@ const CompleteOrderAPI = require("./routes/CompleteOrder")
 
 const uri = "mongodb+srv://admin:2Sr3!sL^r4wX@cluster0.kemmroz.mongodb.net/database?retryWrites=true&w=majority"
 mongoose.connect(uri)
-
 mongoose.connection.once("open", () => console.log("connected")).on("error", (e) => console.log(`Error : ${e}`))
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+var corsOptions = {
+    origin: 'https://www.fittlyf.com/',
+    optionsSuccessStatus: 200,
+    methods: "GET, POST, PUT" 
+}
+app.use(cors(corsOptions))
 const port = process.env.PORT || 9000
 
 app.use("/api/send/order", OrdersAPI)
@@ -30,4 +34,4 @@ const sslServer = https.createServer({
     cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
 },app)
 
-sslServer.listen(port, () => { console.log(`Secure server listening on ${port}`) })
+app.listen(port, () => { console.log(`Secure server listening on ${port}`) })

@@ -7,7 +7,6 @@ router.post("/get", (req, res) => {
     let message = req.body
     console.log(message)
     CompleteOrder.findOne({ orderID: message.id }, (err, data) => {
-        // console.log(data)
         if (err) {
             res.status(500).send(err)
         }

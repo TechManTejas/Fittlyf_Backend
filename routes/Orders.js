@@ -5,6 +5,7 @@ const OrderPage = require("../models/Order")
 
 router.post("/1", (req, res) => {
     let message = req.body
+    console.log(message)
     message = {
         ...message, date: new Date(), id: uuid(), cod: null, shippingSame: null, razorpay_order_id: null,
         razorpay_payment_id: null,
