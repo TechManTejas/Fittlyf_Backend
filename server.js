@@ -28,10 +28,14 @@ app.use("/api/send/order", OrdersAPI)
 app.use("/razorpay", RazorpayPaymentGatewayAPI)
 app.use("/placeorder", ShipRocketOrdersAPI)
 app.use("/orders", CompleteOrderAPI)
+app.use("/.well-known/pki-validation/3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt", (req, res) => {
+    res.sendFile(path.join(__dirname,'' ,'3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt'))
+})
 
 const sslServer = https.createServer({
-    key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
-    cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'server.key')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'fittlyf.crt')),
+    ca: fs.readFileSync(path.join(__dirname, 'cert', 'gd_bundle-g2-g1.crt'))
 },app)
 
 app.listen(port, () => { console.log(`Secure server listening on ${port}`) })
