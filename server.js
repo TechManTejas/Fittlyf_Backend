@@ -22,7 +22,7 @@ var corsOptions = {
     methods: "GET, POST, PUT" 
 }
 app.use(cors(corsOptions))
-const port = process.env.PORT || 80
+const port = process.env.PORT || 443
 
 app.use("/api/send/order", OrdersAPI)
 app.use("/razorpay", RazorpayPaymentGatewayAPI)
