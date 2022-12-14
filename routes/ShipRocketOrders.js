@@ -12,10 +12,9 @@ router.post("/", async (req, res) => {
     await OrderPage.findOne({ id: id },async function (err, data) {
         mongoData = data
         Products.findOne({ sku: mongoData.sku }, function (err, data) {
-            mongoData.Price = data.pack.price;
-            console.log(mongoData.Price, "is price of it");
-        }).clone().then(() => {
+            mongoData['Price'] = data.pack.price;
             console.log(mongoData)
+        }).clone().then(() => {
             var bearerToken;
             var urlGetToken = "https://apiv2.shiprocket.in/v1/external/auth/login/"
             var urlCreateOrder = "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc/"
@@ -71,10 +70,10 @@ router.post("/", async (req, res) => {
                 "transaction_charges": 0,
                 "total_discount": 0,
                 "sub_total": mongoData.Price,
-                "length": 10,
-                "breadth": 15,
-                "height": 20,
-                "weight": 200,
+                "length": 0,
+                "breadth": 0,
+                "height": 0,
+                "weight": 0,
                 "ewaybill_no": "",
                 "customer_gstin": "",
                 "invoice_number": "",
