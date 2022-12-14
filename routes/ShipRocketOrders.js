@@ -11,8 +11,9 @@ router.post("/", async (req, res) => {
 
     await OrderPage.findOne({ id: id },async function (err, data) {
         mongoData = data
-        await Products.findOne({ sku: mongoData.sku }, async function (err, data) {
+        Products.findOne({ sku: mongoData.sku }, function (err, data) {
             mongoData.Price = data.pack.price;
+            console.log(mongoData.Price, "is price of it");
         }).clone().then(() => {
             console.log(mongoData)
             var bearerToken;
@@ -40,7 +41,7 @@ router.post("/", async (req, res) => {
                 "billing_state": mongoData.state,
                 "billing_country": "India",
                 "billing_email": mongoData.emailPhoneNumber,
-                "billing_phone": "9876543210",
+                "billing_phone": mongoData.PhoneNumber,
                 "billing_alternate_phone": "",
                 "shipping_is_billing": true,
                 "shipping_customer_name": "",
