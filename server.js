@@ -24,7 +24,7 @@ var corsOptions = {
 }
 
 app.use(cors(corsOptions))
-const port = process.env.PORT || 9000
+const port = process.env.PORT || 443
 
 app.use("/api/send/order", OrdersAPI)
 app.use("/razorpay", RazorpayPaymentGatewayAPI)
@@ -40,4 +40,4 @@ const sslServer = https.createServer({
     ca: fs.readFileSync(path.join(__dirname, 'cert', 'gd_bundle-g2-g1.crt'))
 },app)
 
-app.listen(port, () => { console.log(`Secure server listening on ${port}`) })
+app.server.listen(port, () => { console.log(`Secure server listening on ${port}`) })
