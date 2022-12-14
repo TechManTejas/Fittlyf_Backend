@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
                 "order_items": [
                     {
                         "name": "Yosha",
-                        "sku": `yoshapack${mongoData.noOfTablets}`,
+                        "sku": mongoData.sku,
                         "units": 1,
                         "selling_price": mongoData.Price,
                         "discount": "",
@@ -70,10 +70,10 @@ router.post("/", async (req, res) => {
                 "transaction_charges": 0,
                 "total_discount": 0,
                 "sub_total": mongoData.Price,
-                "length": 0,
-                "breadth": 0,
-                "height": 0,
-                "weight": 0,
+                "length": 10,
+                "breadth": 20,
+                "height": 10,
+                "weight": 100,
                 "ewaybill_no": "",
                 "customer_gstin": "",
                 "invoice_number": "",
