@@ -40,4 +40,4 @@ const sslServer = https.createServer({
     ca: fs.readFileSync(path.join(__dirname, 'cert', 'gd_bundle-g2-g1.crt'))
 },app)
 
-app.server.listen(port, () => { console.log(`Secure server listening on ${port}`) })
+app.listen(port, () => { console.log(`Secure server listening on ${port}`) })
