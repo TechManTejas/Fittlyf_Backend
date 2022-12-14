@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
         mongoData = data
         Products.findOne({ sku: mongoData.sku }, function (err, data) {
             mongoData['Price'] = data.pack.price;
-            console.log(mongoData)
+            // console.log(mongoData)
         }).clone().then(() => {
             var bearerToken;
             var urlGetToken = "https://apiv2.shiprocket.in/v1/external/auth/login/"
@@ -48,11 +48,11 @@ router.post("/", async (req, res) => {
                 "shipping_address": mongoData.shippingSame ? "" : mongoData.ShippingAddress,
                 "shipping_address_2": mongoData.shippingSame ? "" : mongoData.ShippingOtherAddress,
                 "shipping_city": mongoData.shippingSame ? "" : mongoData.ShippingCity,
-                "shipping_pincode": mongoData.shippingSame ? "" : mongoData.ShippingPincode,
+                "shipping_pincode": mongoData.shippingSame ? "" : parseInt(mongoData.ShippingPin),
                 "shipping_country": mongoData.shippingSame ? "" : mongoData.ShippingCountry,
                 "shipping_state": mongoData.shippingSame ? "" : mongoData.ShippingState,
-                "shipping_email": "",
-                "shipping_phone": "",
+                "shipping_email": mongoData.emailPhoneNumber,
+                "shipping_phone": mongoData.PhoneNumber,
                 "order_items": [
                     {
                         "name": "Yosha",
@@ -64,7 +64,7 @@ router.post("/", async (req, res) => {
                         "hsn": 441122
                     }
                 ],
-                "payment_method": "Prepaid",
+                "payment_method": mongoData.cod ? "COD" : "Prepaid" ,
                 "shipping_charges": 0,
                 "giftwrap_charges": 0,
                 "transaction_charges": 0,
@@ -86,10 +86,10 @@ router.post("/", async (req, res) => {
                 axios.post(urlCreateOrder, orderData, {
                     headers: { 'Authorization': `Bearer ${bearerToken}` }
                 }).then((data) => {
-                    console.log(data);
+                    // console.log(data);
                     res.status(200).send({ code: 'success' });
                 }).catch((error) => {
-                    console.log(error);
+                    console.log(error.response);
                     res.status(500).send(error.message);
                 })
             }).catch((error) => {
