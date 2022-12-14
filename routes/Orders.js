@@ -5,7 +5,7 @@ const OrderPage = require("../models/Order")
 
 router.post("/1", (req, res) => {
     let message = req.body
-    console.log(message)
+    // console.log(message)
     message = {
         ...message, date: new Date(), id: uuid(), cod: null, shippingSame: null, razorpay_order_id: null,
         razorpay_payment_id: null,
@@ -16,7 +16,7 @@ router.post("/1", (req, res) => {
             res.status(500).send("error")
         }
         else {
-            console.log("success")
+            // console.log("success")
             res.status(200).send({ code: "success", data: { data } })
         }
     })
@@ -25,8 +25,12 @@ router.post("/1", (req, res) => {
 
 router.post("/2", (req, res) => {
     let message = req.body
-    OrderPage.findOneAndUpdate({ id: message.id }, { cod: message.cod }).then(() => {
-        console.log("success")
+    OrderPage.findOneAndUpdate({ id: message.id }, { cod: message.cod }).then((e) => {
+        if(e === null){
+            res.status(204).send("error")
+            return;
+        }
+        // console.log("success")
         res.status(200).send({ code: "success" })
     })
 })
@@ -34,8 +38,12 @@ router.post("/2", (req, res) => {
 
 router.post("/3", (req, res) => {
     let message = req.body
-    OrderPage.findOneAndUpdate({ id: message.id }, { shippingSame: message.shippingSame }).then(() => {
-        console.log("success")
+    OrderPage.findOneAndUpdate({ id: message.id }, { shippingSame: message.shippingSame }).then((e) => {
+        if(e === null){
+            res.status(204).send("error")
+            return;
+        }
+        // console.log("success")
         res.status(200).send({ code: "success" })
     })
 })
@@ -46,8 +54,28 @@ router.post("/payment", (req, res) => {
         razorpay_order_id: message.razorpay_order_id,
         razorpay_payment_id: message.razorpay_payment_id,
         razorpay_signature: message.razorpay_signature
-    }).then(() => {
-        console.log("success")
+    }).then((e) => {
+        if(e === null){
+            res.status(204).send("error")
+            return;
+        }
+        // console.log("success")
+        res.status(200).send({ code: "success" })
+    })
+})
+
+router.post("/updateAddress", (req, res) => {
+    let message = req.body
+    console.log({...message})
+    OrderPage.findOneAndUpdate({ id: message.id }, {
+        ...message
+    }).then((e) => {
+        
+        if(e === null){
+            res.status(204).send("error")
+            return;
+        }
+        // console.log("success")
         res.status(200).send({ code: "success" })
     })
 })

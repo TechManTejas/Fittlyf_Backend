@@ -16,11 +16,13 @@ mongoose.connection.once("open", () => console.log("connected")).on("error", (e)
 
 const app = express()
 app.use(express.json())
+
 var corsOptions = {
-    origin: 'https://www.fittlyf.com/',
+    origin: '*',
     optionsSuccessStatus: 200,
     methods: "GET, POST, PUT" 
 }
+
 app.use(cors(corsOptions))
 const port = process.env.PORT || 9000
 

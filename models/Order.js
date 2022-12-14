@@ -15,13 +15,19 @@ const OrderSchema = mongoose.Schema({
     saveThis: Boolean,
     utc: Date,
     Price: Number,
-    sku: String, 
+    sku: String,
     cod: Boolean,
     shippingSame: Boolean,
     PhoneNumber: Number,
     razorpay_order_id: String,
     razorpay_payment_id: String,
-    razorpay_signature: String
+    razorpay_signature: String,
+    ShippingCountry: String,
+    ShippingAddress: String,
+    ShippingCity: String,
+    ShippingState: String,
+    ShippingPin: String,
+    ShippingOtherAddress: String,
 })
 
 module.exports = mongoose.model("orders", OrderSchema);

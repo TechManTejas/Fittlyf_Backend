@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
         Products.findOne({ sku: mongoData.sku}, async function (err, data) {
             const amount = data.pack.price;
             const currency = 'INR'
-
             const options = {
                 amount: amount * 100,
                 currency: currency,
@@ -29,7 +28,6 @@ router.post('/', async (req, res) => {
                     key2: "value2"
                 }
             }    
-            
             try {
                 const response = await razorpayInstance.orders.create(options)
                 console.log("Razorpay")
