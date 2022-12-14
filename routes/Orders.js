@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const { uuid } = require('uuidv4');
-const OrderPage = require("../models/Order")
+const OrderPage = require("../models/Order");
+const Product = require('../models/Product');
 
 router.post("/1", (req, res) => {
     let message = req.body
@@ -26,7 +27,7 @@ router.post("/1", (req, res) => {
 router.post("/2", (req, res) => {
     let message = req.body
     OrderPage.findOneAndUpdate({ id: message.id }, { cod: message.cod }).then((e) => {
-        if(e === null){
+        if (e === null) {
             res.status(204).send("error")
             return;
         }
@@ -39,7 +40,7 @@ router.post("/2", (req, res) => {
 router.post("/3", (req, res) => {
     let message = req.body
     OrderPage.findOneAndUpdate({ id: message.id }, { shippingSame: message.shippingSame }).then((e) => {
-        if(e === null){
+        if (e === null) {
             res.status(204).send("error")
             return;
         }
@@ -55,7 +56,7 @@ router.post("/payment", (req, res) => {
         razorpay_payment_id: message.razorpay_payment_id,
         razorpay_signature: message.razorpay_signature
     }).then((e) => {
-        if(e === null){
+        if (e === null) {
             res.status(204).send("error")
             return;
         }
@@ -66,17 +67,28 @@ router.post("/payment", (req, res) => {
 
 router.post("/updateAddress", (req, res) => {
     let message = req.body
-    console.log({...message})
+    console.log({ ...message })
     OrderPage.findOneAndUpdate({ id: message.id }, {
         ...message
     }).then((e) => {
-        
-        if(e === null){
+
+        if (e === null) {
             res.status(204).send("error")
             return;
         }
-        // console.log("success")
         res.status(200).send({ code: "success" })
+    })
+})
+
+router.post("/getproductdata", (req, res) => {
+    let message = req.body
+    Product.findOne({ sku: message.sku }, (err, data) => {
+        if (err) {
+            res.status(500).send("error")
+        }
+        else {
+            res.status(200).send({ code: "success", data: { data } })
+        }
     })
 })
 

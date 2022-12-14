@@ -16,6 +16,12 @@ const CompleteOrderSchema = mongoose.Schema({
     PhoneNumber : Number,
     price: Number,
     sku: String,
+    ShippingCountry: String,
+    ShippingAddress: String,
+    ShippingCity: String,
+    ShippingState: String,
+    ShippingPin: String,
+    ShippingOtherAddress: String,
 })
 
 module.exports = mongoose.model("CompleteOrders", CompleteOrderSchema);
