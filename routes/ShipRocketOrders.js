@@ -73,7 +73,7 @@ router.post("/", async (req, res) => {
                 "length": 10,
                 "breadth": 20,
                 "height": 10,
-                "weight": 100,
+                "weight": 0.3,
                 "ewaybill_no": "",
                 "customer_gstin": "",
                 "invoice_number": "",
