@@ -89,7 +89,7 @@ router.post("/", async (req, res) => {
                     // console.log(data);
                     res.status(200).send({ code: 'success' });
                 }).catch((error) => {
-                    console.log(error.response);
+                    // console.log(error.response);
                     res.status(500).send(error.message);
                 })
             }).catch((error) => {
