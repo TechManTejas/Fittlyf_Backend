@@ -10,6 +10,7 @@ const RazorpayPaymentGatewayAPI = require("./routes/RazorpayPaymentGateway")
 const ShipRocketOrdersAPI = require("./routes/ShipRocketOrders")
 const CompleteOrderAPI = require("./routes/CompleteOrder")
 const WebinarAPI = require("./routes/Webinar")
+const UserAPI = require("./routes/Users")
 
 const uri = "mongodb+srv://admin:2Sr3!sL^r4wX@cluster0.kemmroz.mongodb.net/database?retryWrites=true&w=majority"
 mongoose.connect(uri)
@@ -32,6 +33,7 @@ app.use("/razorpay", RazorpayPaymentGatewayAPI)
 app.use("/placeorder", ShipRocketOrdersAPI)
 app.use("/orders", CompleteOrderAPI)
 app.use("/webinar", WebinarAPI)
+app.use("/user", UserAPI)
 app.use("/.well-known/pki-validation/3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt", (req, res) => {
     res.sendFile(path.join(__dirname, '', '3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt'))
 })
