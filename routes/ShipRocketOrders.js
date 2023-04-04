@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
             }
             var orderData = {
                 "order_id": id,
-                "order_date": "2023-01-01 11:11", // to be done
+                "order_date": "2023-04-04 11:11", // to be done
                 "pickup_location": "Bangalore",
                 "channel_id": "",
                 "comment": "",

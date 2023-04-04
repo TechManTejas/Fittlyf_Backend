@@ -27,6 +27,7 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 const port = process.env.PORT || 9000
+// const port = process.env.PORT || 443
 
 app.use("/api/send/order", OrdersAPI)
 app.use("/razorpay", RazorpayPaymentGatewayAPI)
@@ -34,8 +35,11 @@ app.use("/placeorder", ShipRocketOrdersAPI)
 app.use("/orders", CompleteOrderAPI)
 app.use("/webinar", WebinarAPI)
 app.use("/user", UserAPI)
-app.use("/.well-known/pki-validation/3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt", (req, res) => {
-    res.sendFile(path.join(__dirname, '', '3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt'))
+// app.use("/.well-known/pki-validation/3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt", (req, res) => {
+//     res.sendFile(path.join(__dirname, '', '3DB3A57CFC3B60CCB59B1EEABF97BAB4.txt'))
+// })
+app.use("/.well-known/pki-validation/3CC8598044A1BA3FF599C9B6DBBB4307.txt", (req, res) => {
+    res.sendFile(path.join(__dirname, '', '3CC8598044A1BA3FF599C9B6DBBB4307.txt'))
 })
 
 const sslServer = https.createServer({
@@ -45,3 +49,4 @@ const sslServer = https.createServer({
 }, app)
 
 app.listen(port, () => { console.log(`Secure server listening on ${port}`) })
+// sslServer.listen(port, () => { console.log(`Secure server listening on ${port}`) })
